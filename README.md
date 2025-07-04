@@ -6,7 +6,7 @@
 
 이 페이지는 GitHub Pages를 통해 배포됩니다.
 
-- **URL**: https://[your-username].github.io/oauth-policy/
+- **URL**: https://kimhyunmook.github.io/oauth-policy/
 - **메인 페이지**: [policy.html](policy.html)
 
 ## 로컬에서 실행
@@ -17,6 +17,7 @@
 
 - HTML5
 - CSS3
+- javascript
 - GitHub Pages
 
 ## 라이선스
