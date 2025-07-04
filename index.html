@@ -5,138 +5,361 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>OAuth Connections Viewer 개인정보 보호정책</title>
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
       body {
-        font-family: sans-serif;
-        line-height: 1.6;
-        max-width: 800px;
-        margin: 2rem auto;
-        padding: 0 1rem;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.7;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        color: #333;
+        padding: 20px;
       }
-      h1 {
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(10px);
+        overflow: hidden;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #2a4d8f 0%, #1e3a6b 100%);
+        color: white;
+        padding: 40px 30px;
         text-align: center;
+        position: relative;
       }
+
+      .header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        opacity: 0.3;
+      }
+
+      .header h1 {
+        font-size: 2.5em;
+        font-weight: 700;
+        margin-bottom: 10px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .header p {
+        font-size: 1.1em;
+        opacity: 0.9;
+        position: relative;
+        z-index: 1;
+      }
+
       .lang-buttons {
         text-align: right;
-        margin-bottom: 1rem;
+        padding: 20px 30px;
+        background: #f8f9fa;
+        border-bottom: 1px solid #e9ecef;
       }
+
       .lang-buttons button {
-        margin-left: 0.5rem;
-        padding: 0.3rem 0.8rem;
+        margin-left: 10px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 25px;
         cursor: pointer;
+        font-weight: 600;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        background: white;
+        color: #2a4d8f;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       }
+
+      .lang-buttons button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        background: #2a4d8f;
+        color: white;
+      }
+
+      .lang-buttons button.active {
+        background: #2a4d8f;
+        color: white;
+      }
+
+      .content {
+        padding: 40px 30px;
+      }
+
       .policy-section {
         display: none;
+        animation: fadeIn 0.5s ease-in-out;
       }
+
       .policy-section.active {
         display: block;
       }
-      strong {
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .policy-section h1 {
+        color: #2a4d8f;
+        font-size: 2.2em;
+        margin-bottom: 30px;
+        text-align: center;
+        font-weight: 700;
+      }
+
+      .policy-section p {
+        margin-bottom: 25px;
+        font-size: 16px;
+        color: #555;
+      }
+
+      .policy-section ol {
+        counter-reset: policy-counter;
+        list-style: none;
+        padding: 0;
+      }
+
+      .policy-section ol li {
+        counter-increment: policy-counter;
+        margin-bottom: 30px;
+        padding: 25px;
+        background: #f8f9fa;
+        border-radius: 15px;
+        border-left: 4px solid #2a4d8f;
+        position: relative;
+        transition: all 0.3s ease;
+      }
+
+      .policy-section ol li:hover {
+        transform: translateX(5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .policy-section ol li::before {
+        content: counter(policy-counter);
+        position: absolute;
+        left: -15px;
+        top: 20px;
+        background: #2a4d8f;
+        color: white;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         font-weight: bold;
+        font-size: 14px;
+      }
+
+      .policy-section strong {
+        font-weight: 700;
+        color: #2a4d8f;
+        font-size: 1.1em;
+      }
+
+      .policy-section code {
+        background: #e9ecef;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-family: "Courier New", monospace;
+        font-size: 0.9em;
+        color: #d63384;
+      }
+
+      .policy-section a {
+        color: #2a4d8f;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+      }
+
+      .policy-section a:hover {
+        color: #1e3a6b;
+        text-decoration: underline;
+      }
+
+      .footer {
+        background: #f8f9fa;
+        padding: 30px;
+        text-align: center;
+        border-top: 1px solid #e9ecef;
+        color: #666;
+      }
+
+      .footer p {
+        margin: 0;
+        font-size: 14px;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 10px;
+        }
+
+        .header h1 {
+          font-size: 2em;
+        }
+
+        .content {
+          padding: 30px 20px;
+        }
+
+        .policy-section ol li {
+          padding: 20px;
+        }
       }
     </style>
   </head>
   <body>
-    <div class="lang-buttons">
-      <button onclick="switchLang('ko')">🇰🇷 한국어</button>
-      <button onclick="switchLang('en')">🇺🇸 English</button>
-    </div>
+    <div class="container">
+      <div class="header">
+        <h1>OAuth Connections Viewer</h1>
+        <p>개인정보 보호정책 / Privacy Policy</p>
+      </div>
 
-    <!-- 한국어 정책 -->
-    <div id="policy-ko" class="policy-section active">
-      <h1>개인정보 보호정책</h1>
-      <p>
-        <strong>OAuth Connections Viewer</strong>는 사용자가 로그인한 여러
-        플랫폼의 OAuth 연결 상태를 한눈에 확인할 수 있도록 도와주는 Chrome 확장
-        프로그램입니다.
-      </p>
+      <div class="lang-buttons">
+        <button onclick="switchLang('ko')" class="active">🇰🇷 한국어</button>
+        <button onclick="switchLang('en')">🇺🇸 English</button>
+      </div>
 
-      <ol>
-        <li>
-          <strong>데이터 수집 범위</strong><br />
-          이 확장 프로그램은 사용자가 명시적으로 요청할 때, 웹 페이지의 공개된
-          DOM 요소를 기반으로 OAuth 연결 정보를 수집합니다. 수집된 데이터는
-          플랫폼 이름, 앱 이름, 연결 상태 등 비민감 정보에 한정됩니다.
-        </li>
-        <li>
-          <strong>데이터 저장 방식</strong><br />
-          수집된 데이터는 사용자의 브라우저의
-          <code>chrome.storage.local</code>에만 저장되며, 외부 서버로 전송되지
-          않습니다.
-        </li>
-        <li>
-          <strong>외부 전송 및 공유 없음</strong><br />
-          어떠한 정보도 외부 서버나 제3자와 공유되지 않습니다.
-        </li>
-        <li>
-          <strong>자동 수집 없음</strong><br />
-          확장 프로그램은 자동으로 데이터를 수집하지 않으며, 사용자가 버튼을
-          눌렀을 때에만 작동합니다.
-        </li>
-        <li>
-          <strong>보안</strong><br />
-          모든 작업은 브라우저 내에서 로컬로 이루어지며 외부 네트워크 통신은
-          발생하지 않습니다.
-        </li>
-        <li>
-          <strong>사용자 제어</strong><br />
-          사용자는 언제든지 저장된 데이터를 삭제하거나 다시 수집할 수 있습니다.
-        </li>
-      </ol>
+      <div class="content">
+        <!-- 한국어 정책 -->
+        <div id="policy-ko" class="policy-section active">
+          <h1>개인정보 보호정책</h1>
+          <p>
+            <strong>OAuth Connections Viewer</strong>는 사용자가 로그인한 여러
+            플랫폼의 OAuth 연결 상태를 한눈에 확인할 수 있도록 도와주는 Chrome
+            확장 프로그램입니다.
+          </p>
 
-      <p>문의: <a href="mailto:example@example.com">example@example.com</a></p>
-    </div>
+          <ol>
+            <li>
+              <strong>데이터 수집 범위</strong><br />
+              이 확장 프로그램은 사용자가 명시적으로 요청할 때, 웹 페이지의
+              공개된 DOM 요소를 기반으로 OAuth 연결 정보를 수집합니다. 수집된
+              데이터는 플랫폼 이름, 앱 이름, 연결 상태 등 비민감 정보에
+              한정됩니다.
+            </li>
+            <li>
+              <strong>데이터 저장 방식</strong><br />
+              수집된 데이터는 사용자의 브라우저의
+              <code>chrome.storage.local</code>에만 저장되며, 외부 서버로
+              전송되지 않습니다.
+            </li>
+            <li>
+              <strong>외부 전송 및 공유 없음</strong><br />
+              어떠한 정보도 외부 서버나 제3자와 공유되지 않습니다.
+            </li>
+            <li>
+              <strong>자동 수집 없음</strong><br />
+              확장 프로그램은 자동으로 데이터를 수집하지 않으며, 사용자가 버튼을
+              눌렀을 때에만 작동합니다.
+            </li>
+            <li>
+              <strong>보안</strong><br />
+              모든 작업은 브라우저 내에서 로컬로 이루어지며 외부 네트워크 통신은
+              발생하지 않습니다.
+            </li>
+            <li>
+              <strong>사용자 제어</strong><br />
+              사용자는 언제든지 저장된 데이터를 삭제하거나 다시 수집할 수
+              있습니다.
+            </li>
+          </ol>
 
-    <!-- English Policy -->
-    <div id="policy-en" class="policy-section">
-      <h1>Privacy Policy</h1>
-      <p>
-        <strong>OAuth Connections Viewer</strong> is a Chrome extension that
-        helps users view their OAuth-connected platforms in one place.
-      </p>
+          <p>
+            문의: <a href="mailto:example@example.com">example@example.com</a>
+          </p>
+        </div>
 
-      <ol>
-        <li>
-          <strong>Data Collection Scope</strong><br />
-          This extension collects OAuth connection info (platform, app name,
-          status) from public DOM elements when explicitly triggered by the
-          user.
-        </li>
-        <li>
-          <strong>Data Storage</strong><br />
-          All data is stored in <code>chrome.storage.local</code> within the
-          user's browser and never sent externally.
-        </li>
-        <li>
-          <strong>No External Sharing</strong><br />
-          No data is ever shared with any server or third party.
-        </li>
-        <li>
-          <strong>No Automatic Collection</strong><br />
-          The extension only runs when the user clicks a button — there is no
-          background tracking.
-        </li>
-        <li>
-          <strong>Security</strong><br />
-          All processing is done locally within the browser with no outside
-          communication.
-        </li>
-        <li>
-          <strong>User Control</strong><br />
-          Users can delete or refresh their stored data at any time.
-        </li>
-      </ol>
+        <!-- English Policy -->
+        <div id="policy-en" class="policy-section">
+          <h1>Privacy Policy</h1>
+          <p>
+            <strong>OAuth Connections Viewer</strong> is a Chrome extension that
+            helps users view their OAuth-connected platforms in one place.
+          </p>
 
-      <p>
-        Contact: <a href="mailto:example@example.com">example@example.com</a>
-      </p>
+          <ol>
+            <li>
+              <strong>Data Collection Scope</strong><br />
+              This extension collects OAuth connection info (platform, app name,
+              status) from public DOM elements when explicitly triggered by the
+              user.
+            </li>
+            <li>
+              <strong>Data Storage</strong><br />
+              All data is stored in <code>chrome.storage.local</code> within the
+              user's browser and never sent externally.
+            </li>
+            <li>
+              <strong>No External Sharing</strong><br />
+              No data is ever shared with any server or third party.
+            </li>
+            <li>
+              <strong>No Automatic Collection</strong><br />
+              The extension only runs when the user clicks a button — there is
+              no background tracking.
+            </li>
+            <li>
+              <strong>Security</strong><br />
+              All processing is done locally within the browser with no outside
+              communication.
+            </li>
+            <li>
+              <strong>User Control</strong><br />
+              Users can delete or refresh their stored data at any time.
+            </li>
+          </ol>
+
+          <p>
+            Contact:
+            <a href="mailto:example@example.com">example@example.com</a>
+          </p>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p>© 2024 OAuth Connections Viewer. All rights reserved.</p>
+      </div>
     </div>
 
     <script>
       function switchLang(lang) {
+        // 정책 섹션 전환
         document
           .querySelectorAll(".policy-section")
           .forEach((el) => el.classList.remove("active"));
         document.getElementById("policy-" + lang).classList.add("active");
+
+        // 버튼 활성 상태 변경
+        document
+          .querySelectorAll(".lang-buttons button")
+          .forEach((btn) => btn.classList.remove("active"));
+        event.target.classList.add("active");
       }
     </script>
   </body>
