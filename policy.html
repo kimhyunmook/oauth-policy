@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OAuth Connections Viewer 개인정보 보호정책</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+      h1 {
+        text-align: center;
+      }
+      .lang-buttons {
+        text-align: right;
+        margin-bottom: 1rem;
+      }
+      .lang-buttons button {
+        margin-left: 0.5rem;
+        padding: 0.3rem 0.8rem;
+        cursor: pointer;
+      }
+      .policy-section {
+        display: none;
+      }
+      .policy-section.active {
+        display: block;
+      }
+      strong {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="lang-buttons">
+      <button onclick="switchLang('ko')">🇰🇷 한국어</button>
+      <button onclick="switchLang('en')">🇺🇸 English</button>
+    </div>
+
+    <!-- 한국어 정책 -->
+    <div id="policy-ko" class="policy-section active">
+      <h1>개인정보 보호정책</h1>
+      <p>
+        <strong>OAuth Connections Viewer</strong>는 사용자가 로그인한 여러
+        플랫폼의 OAuth 연결 상태를 한눈에 확인할 수 있도록 도와주는 Chrome 확장
+        프로그램입니다.
+      </p>
+
+      <ol>
+        <li>
+          <strong>데이터 수집 범위</strong><br />
+          이 확장 프로그램은 사용자가 명시적으로 요청할 때, 웹 페이지의 공개된
+          DOM 요소를 기반으로 OAuth 연결 정보를 수집합니다. 수집된 데이터는
+          플랫폼 이름, 앱 이름, 연결 상태 등 비민감 정보에 한정됩니다.
+        </li>
+        <li>
+          <strong>데이터 저장 방식</strong><br />
+          수집된 데이터는 사용자의 브라우저의
+          <code>chrome.storage.local</code>에만 저장되며, 외부 서버로 전송되지
+          않습니다.
+        </li>
+        <li>
+          <strong>외부 전송 및 공유 없음</strong><br />
+          어떠한 정보도 외부 서버나 제3자와 공유되지 않습니다.
+        </li>
+        <li>
+          <strong>자동 수집 없음</strong><br />
+          확장 프로그램은 자동으로 데이터를 수집하지 않으며, 사용자가 버튼을
+          눌렀을 때에만 작동합니다.
+        </li>
+        <li>
+          <strong>보안</strong><br />
+          모든 작업은 브라우저 내에서 로컬로 이루어지며 외부 네트워크 통신은
+          발생하지 않습니다.
+        </li>
+        <li>
+          <strong>사용자 제어</strong><br />
+          사용자는 언제든지 저장된 데이터를 삭제하거나 다시 수집할 수 있습니다.
+        </li>
+      </ol>
+
+      <p>문의: <a href="mailto:example@example.com">example@example.com</a></p>
+    </div>
+
+    <!-- English Policy -->
+    <div id="policy-en" class="policy-section">
+      <h1>Privacy Policy</h1>
+      <p>
+        <strong>OAuth Connections Viewer</strong> is a Chrome extension that
+        helps users view their OAuth-connected platforms in one place.
+      </p>
+
+      <ol>
+        <li>
+          <strong>Data Collection Scope</strong><br />
+          This extension collects OAuth connection info (platform, app name,
+          status) from public DOM elements when explicitly triggered by the
+          user.
+        </li>
+        <li>
+          <strong>Data Storage</strong><br />
+          All data is stored in <code>chrome.storage.local</code> within the
+          user's browser and never sent externally.
+        </li>
+        <li>
+          <strong>No External Sharing</strong><br />
+          No data is ever shared with any server or third party.
+        </li>
+        <li>
+          <strong>No Automatic Collection</strong><br />
+          The extension only runs when the user clicks a button — there is no
+          background tracking.
+        </li>
+        <li>
+          <strong>Security</strong><br />
+          All processing is done locally within the browser with no outside
+          communication.
+        </li>
+        <li>
+          <strong>User Control</strong><br />
+          Users can delete or refresh their stored data at any time.
+        </li>
+      </ol>
+
+      <p>
+        Contact: <a href="mailto:example@example.com">example@example.com</a>
+      </p>
+    </div>
+
+    <script>
+      function switchLang(lang) {
+        document
+          .querySelectorAll(".policy-section")
+          .forEach((el) => el.classList.remove("active"));
+        document.getElementById("policy-" + lang).classList.add("active");
+      }
+    </script>
+  </body>
+</html>
